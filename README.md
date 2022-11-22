@@ -22,6 +22,10 @@ cd kms-integration
 npm install
 ```
 
+## Configuring
+
+You may want to edit the set of plugins and their configuration in [index.ts](src/index.ts). See the [plugin docs](https://github.com/streamr-dev/network/blob/HEAD/packages/broker/plugins.md) for more info.
+
 ## Running
 
 Pass the AWS credentials and KMS key id in the following environment variables to `npm start`:
