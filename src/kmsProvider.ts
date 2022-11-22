@@ -9,11 +9,11 @@ export class KMSProvider extends CustomProvider {
 		this.signer = new AwsKmsSigner(credentials)
 	}
 
-    async getAddress(): Promise<string> {
-        return this.signer.getAddress()
-    }
+	async getAddress(): Promise<string> {
+		return this.signer.getAddress()
+	}
 
-    async signMessage(message: Buffer): Promise<string> {
-        return this.signer.signMessage(message)
-    }
+	async signMessage(message: Buffer): Promise<string> {
+		return this.signer.signMessage(message)
+	}
 }
