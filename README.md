@@ -16,10 +16,8 @@ The Broker is started programmatically by the [index.ts](src/index.ts) wrapper. 
 
 ## Installing
 
-Clone the repository, then in the repository root:
-
 ```
-git@github.com:streamr-dev/kms-integration.git
+git clone git@github.com:streamr-dev/kms-integration.git
 cd kms-integration
 npm install
 ```
