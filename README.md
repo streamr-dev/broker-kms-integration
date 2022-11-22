@@ -26,9 +26,9 @@ npm install
 
 Pass the AWS credentials and KMS key id in the following environment variables to `npm start`:
 
-- `AWS_ACCESS_KEY_ID` - the access key id for the IAM user with permission to use the KMS key
+- `AWS_ACCESS_KEY_ID` - the access key id for the IAM user with permission to use the KMS key, starts with `AKIA...`
 - `AWS_SECRET_ACCESS_KEY` - the secret access key for the same user
-- `AWS_REGION` - the region where the KMS key is
+- `AWS_REGION` - the region where the KMS key is, for example `us-east-1`
 - `AWS_KEY_ARN` - the arn of the KMS key, for example `arn:aws:kms:us-east-1:765457315199:key/16606223-2774-4535-a1af-af80cdcb6f51`
 
 For example:
