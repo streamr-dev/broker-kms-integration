@@ -1,4 +1,4 @@
-# Using AWS KMS to sign Streamr messages
+# Using AWS KMS with Streamr Broker
 
 This repo contains an example of running a Streamr Broker that signs messages using a private key stored on AWS KMS.
 
