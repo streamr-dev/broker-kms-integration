@@ -1,6 +1,4 @@
 import { ExternalProvider } from 'streamr-client'
-import { hash } from './signingUtils'
-import { log } from './log'
 
 const CHAIN_ID = 12345 // irrelevant for signing messages
 
@@ -14,7 +12,6 @@ export abstract class CustomProvider implements ExternalProvider {
 
     public async request(request: any): Promise<any> {
         const { method, params } = request
-        log(`Ethereum request: ${method}`)
         switch (method) {
             case 'eth_requestAccounts':
             case 'eth_accounts':
@@ -23,9 +20,7 @@ export abstract class CustomProvider implements ExternalProvider {
             case 'personal_sign':
                 const payloadHex = params[0]
                 const payload = Buffer.from(payloadHex.substring(2), 'hex')
-                log(`Ethereum request payload: ${payload.toString('utf-8')}`)
-                const msgHash = hash(payload)
-                return this.signHash(msgHash)
+                return this.signMessage(payload)
             case 'eth_chainId':
                 return CHAIN_ID
             default:
@@ -34,5 +29,5 @@ export abstract class CustomProvider implements ExternalProvider {
     }
 
     abstract getAddress(): Promise<string>;
-    abstract signHash(msgHash: Buffer): Promise<string>;
+    abstract signMessage(message: Buffer): Promise<string>;
 }

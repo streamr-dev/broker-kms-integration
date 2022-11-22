@@ -1,31 +1,27 @@
 import { createBroker } from 'streamr-broker'
-import { CustomProvider } from './customProvider'
+import { KMSProvider } from './kmsProvider'
 import { log } from './log'
 
-class RedstoneProvider extends CustomProvider {
-    async getAddress(): Promise<string> {
-		// TODO: your KMS implementation here to retrieve the Ethereum address associated with private key
-        return ...
-    }
-
-    async signHash(msgHash: Buffer): Promise<string> {
-		// TODO: your AWS KMS implementation here to sign with a private key
-        return ...
-    }
-}
+const kmsProvider = new KMSProvider({
+	accessKeyId: process.env.AWS_ACCESS_KEY_ID || '',
+	secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || '',
+	region: process.env.AWS_REGION || '',
+	keyId: process.env.AWS_KEY_ARN || '',
+})
 
 const main = async () => {
+	log(`Starting broker with Ethereum address ${await kmsProvider.getAddress()} in KMS`)
+
     const broker = await createBroker({
         client: {
             auth: {
-                ethereum: new RedstoneProvider()
+                ethereum: kmsProvider,
             }
         },
         plugins: {
 			// Add whatever interface plugins you want to use
-			websocket: {
-				port: 7170,
-			}
+			http: {},
+			websocket: {},
         }
     })
     await broker.start()
